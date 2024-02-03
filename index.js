@@ -17,7 +17,7 @@ app.use("/posts", postRoutes);
 //ttB3qe6ce01hkIPt
 
 const CONNECTION_URL =
-  "mongodb+srv://abdullah:ttB3qe6ce01hkIPt@cluster0.rktpia1.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://abdullah:ttB3qe6ce01hkIPt@cluster0.rktpia1.mongodb.net/post?retryWrites=true&w=majority";
 
 const PORT = process.env.PORT || 5000 ;
 

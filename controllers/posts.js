@@ -1,10 +1,11 @@
+import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
 
 export const getPosts = async (req, res) => {
   try {
     const postMessages = await PostMessage.find();
 
-    console.log(postMessages);
+    // console.log(postMessages);
 
     res.status(200).json(postMessages);
   } catch (err) {
@@ -26,3 +27,15 @@ export const createPost = async (req, res) => {
     });
   }
 };
+
+export const updatePost = async (req, res) => {
+  const { id: _id } = req.params;  //hare just rename the id to _id;
+  const post = req.body;
+
+  if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No Post with that Id"); //cheacking id is valid or not
+   
+  
+  const updatedPost = await PostMessage.findByIdAndUpdate(_id, {...post, _id}, { new: true });
+
+  res.json(updatePost);
+}
