@@ -1,6 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+const cloud_name = process.env.CLOUD_NAME;
+console.log("abdullah");
+console.log(cloud_name)
 
 import express from "express";
 import bodyParser from "body-parser";
@@ -15,14 +18,18 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(cors());
+app.use(express.json())
 app.use("/posts", postRoutes);
 
 
-const PORT = process.env.PORT || 4000 ;
+const port = process.env.PORT || 4000 ;
 
-mongoose
-  .connect(process.env.CONNECTION_STRING2, { useNewUrlParser: true})
-  .then(() =>
-    app.listen(PORT, () => console.log(`Server is running port:${PORT}`))
-  )
+
+
+mongoose.connect(process.env.CONNECTION_STRING2, { useNewUrlParser: true})
+  .then((conn) => {
+    console.log("DB connection is successful");
+  })
   .catch((err) => console.log(err.message));
+
+  const server = app.listen(port, () => console.log(`Server is running at port ${port}`))
