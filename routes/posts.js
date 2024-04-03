@@ -10,9 +10,9 @@ router.route("/")
         .post(userUpload.single("image"), createPost);
 
 router.route("/:id")
-            .patch(updatePost)
+            .patch(userUpload.single("image"), updatePost)
             .delete(deletePost);
 
-router.route("/id/likePost").patch(likePost);
+router.route("/likePost/:id").patch(likePost);
 
 export default router;
